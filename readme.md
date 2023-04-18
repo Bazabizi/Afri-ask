@@ -14,24 +14,24 @@
  - MySQL for the database
  - Bootstrap for the responsive design
  - Getting Started
- - To get started with Afri-Ask website, follow these steps:
+# To get started with Afri-Ask website, follow these steps:
 
-Clone the repository to your local machine.
+- Clone the repository to your local machine.
 
-Import the database schema from the database.sql file to set up the database.
+- Import the database schema from the database.sql file to set up the database.
 
-Update the database configuration settings in the config.php file to match your environment.
+- Update the database configuration settings in the config.php file to match your environment.
 
-Start a PHP server to host the website files.
+- Start a PHP server to host the website files.
 
-Access the website by navigating to http://localhost:<port number>/ in your web browser.
+# Access the website by navigating to http://localhost:<port number>/ in your web browser.
 
 Contributing
-If you would like to contribute to the Afri-Ask website, please fork this repository and submit a pull request with your changes.
+- If you would like to contribute to the Afri-Ask website, please fork this repository and submit a pull request with your changes.
 
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-Acknowledgments
-The design and functionality of this website are inspired by Quora.
-This project was created as part of a coding bootcamp curriculum.
+# License
+- This project is licensed under the MIT License. See the LICENSE file for details.
+ 
+# Acknowledgments
+- The design and functionality of this website are inspired by Quora.
+- This project was created as part of a coding bootcamp curriculum.
