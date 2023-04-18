@@ -1,0 +1,104 @@
+.signUp {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(9, 5, 54, 0.3), rgba(5, 4, 46, 0.7)), url("Images/Registration_background.jpg");
+}
+.container {
+    max-width: 700px;
+    width: 100%;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+}
+
+.container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.container .title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: #5627DA;
+}
+
+.container #log-form {
+    flex-wrap: wrap;
+    margin: 20px 0 12px 0;
+}
+
+.container #log-form .inp-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.container #log-form .iinp-control label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.container #log-form .inp-control input {
+    height: 40px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 3px;
+    transition: all 0.3s ease;
+}
+
+.container #log-form .inp-control input:focus {
+    border-color: #5627DA;
+}
+
+.container #log-form .inp-control.success input {
+    border-color: #27da5d;
+}
+
+.container #log-form .inp-control.error input {
+    border-color: #f30e0e;
+}
+
+.inp-control .error {
+    color: #f30e0e;
+    font-size: 9px;
+    height: 13px;
+}
+
+form .button input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    transition: 0.3s ease;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-radius: 5px;
+}
+
+form .button input:hover {
+    background: linear-gradient(135deg, #e6de71, #a8b659);
+}
+form .button {
+    display: flex;
+    justify-content: space-evenly;
+    height: 45px;
+    margin: 45px 0;
+    padding: auto;
+}
