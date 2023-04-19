@@ -16,6 +16,27 @@ hideTextareaBtn.addEventListener('click', () => {
   textareaContainer.style.display = 'none';
 });
 
+document.addEventListener("click", function(event) {
+  if (!event.target.closest(".popup-container")) {
+    hidePopup();
+  }
+});
+
+function hidePopup() {
+  var popup = document.getElementById("popup");
+  popup.style.display = "none";
+}
+
+function showPopup() {
+  var popup = document.getElementById("popup");
+  popup.style.display = "block";
+  popup.style.top = event.clientY + "px";
+  popup.style.left = (event.clientX + 10) + "px";
+}
+
+var profilePicture = document.getElementById("profile-picture");
+profilePicture.addEventListener("click", showPopup);
+
 form.addEventListener('submit', e => {
   e.preventDefault();
 

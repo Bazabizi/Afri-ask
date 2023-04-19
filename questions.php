@@ -1,53 +1,15 @@
 <?php
-require_once "pdo.php";
 session_start();
-
 require_once "pdo.php";
-$sql = "select user.fullname , questions.question, answers.answer from answers Join 
-user on answers.user_id = user.id
-join questions on questions.question_id = answers.ques_id";
+$sql = "select user.fullname , questions.question, questions.question_id from questions Join 
+user on questions.user_id = user.id";
 
 
 $stmt = $pdo->query($sql);
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if (!isset($_SESSION['token'])) {
-    // Redirect to login page if token is not set
-    header('Location: login.php');
-    exit;
-}
-
-$token = $_SESSION['token'];
-
-$stmt = $pdo->prepare('SELECT * FROM User WHERE token = ?');
-$stmt->execute([$token]);
-$user = $stmt->fetch();
-
-if (!$user) {
-    // Redirect to login page if token is invalid
-    header('Location: login.php');
-    exit;
-}
-
-if(isset($_POST['search'])){
-
-    $sentences = $_POST['search'];
-    $words = explode(" " , $sentences);
-    
-    $sql = "SELECT user.id , user.fullname , questions.question_id, questions.question , answers.answer FROM answers JOIN questions ON questions.question_id = answers.ques_id 
-    join user on user.id = answers.user_id WHERE ";
-    
-    foreach ($words as $word) {
-        $sql .= "questions.question LIKE '%" . $word . "%' AND ";
-    }
-    
-    $sql = substr($sql, 0, -5); // remove the last ' AND '
-    $sql .= " GROUP BY questions.question_id HAVING COUNT(*) >= 2";
-
-    $stmt = $pdo->query($sql);
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -165,58 +127,27 @@ if(isset($_POST['search'])){
     <div class="bg-light pt-4">
       <div class="container mb-5">
         <div class="row">
-          <div class="col-8 container justify-content-center">
-            <div class="bg-white border-grey">
-              <div class="row">
-                <div class="col"></div>
-                <div class="row text-gray-darker pb-2 ps-4 pe-4">
-                  <div class="py-3">
-                    <form method="POST" class="d-flex">
-                      <input
-                        class="form-control me-2 search-icon ms-4"
-                        name="search"
-                        type="search"
-                        placeholder="Search Afri-Ask"
-                        width="90"
-                        height="100"
-                      />
-                    </form>
-                  </div>
-                  <div class="col text-center border-end hover-dark">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="20px"
-                      viewBox="0 96 960 960"
-                      width="20px"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M480 1016 360 896H180q-24 0-42-18.5T120 836V236q0-24 18-42t42-18h600q23 0 41.5 18t18.5 42v600q0 23-18.5 41.5T780 896H600l-120 120ZM180 836h204l96 96 96-96h204V236H180v600Zm0-600v600-600Zm297.028 522Q493 758 504 746.972q11-11.028 11-27T503.972 693q-11.028-11-27-11T450 693.028q-11 11.028-11 27T450.028 747q11.028 11 27 11ZM501 610q0-31 10-50.5t34.721-44.221Q579 482 592 456.5t13-53.5q0-53-34-84t-91.523-31q-51.866 0-88.171 24.5Q355 337 338 380l53 22q14-28 36.2-42.5Q449.4 345 479 345q32 0 50.5 16t18.5 44.098Q548 425 537 443.5T500 487q-37 35-46.5 60t-9.5 63h57Z"
-                      />
-                    </svg>
-                    <a href="ask.php" class="button-link">Ask</a>
-                  </div>
-
-                  <div class="col text-center border-end hover-dark">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="20"
-                      viewBox="0 96 960 960"
-                      width="20"
-                      fill="currentColor"
-                    >
-                      <path
-                        d="M180 1044q-24 0-42-18t-18-42V384q0-24 18-42t42-18h405l-60 60H180v600h600V636l60-60v408q0 24-18 42t-42 18H180Zm300-360Zm182-352 43 42-285 284v86h85l286-286 42 42-303 304H360V634l302-302Zm171 168L662 332l100-100q17-17 42.311-17T847 233l84 85q17 18 17 42.472T930 402l-97 98Z"
-                      />
-                    </svg>
-                    <span>
-                      <a href="questions.php" class="button-link">Answer</a>
-                    </span>
-                  </div>
+          <div class="container col-8 justify-content-center">
+            <div class="post bg-white border=gray mt-4">
+              <div class="border-bottom">
+                <h2 class="text-center py-3 text-main-color">Questions</h2>
+                <div class="py-3">
+                  <form class="d-flex">
+                    <input
+                      class="form-control me-2 search-icon ms-4"
+                      name="search"
+                      type="search"
+                      placeholder="Search Afri-Ask"
+                      width="90"
+                      height="100"
+                    />
+                  </form>
+                </div>
+              </div>
                 </div>
               </div>
             </div>
-            <div class="post bg-white border=gray mt-4">
+            <div class="container justify-content-center col-8 post bg-white border=gray mt-4">
               <div class="pt-2 d-flex justify-content-between">
                 <ul>
                 <?php
@@ -241,14 +172,16 @@ if(isset($_POST['search'])){
                   ?></span>
                   <br />
                   <span>
-                    <?php
-                    echo $row['answer']."\n";
-                    ?>
                   </span>
                   <div class="post-footer pt-2 pb-1 ps-2">
                     <div class="btn-group" role="group">
-                      <div class="pe-2">
-                        <a href="answer.html" class="button-link"
+                      <div class="pe-2" >
+                      <?php 
+                      $_SESSION['ID'] = $row['question'];
+                      $id = $row['question_id'];
+                      $url = "answer.php?id=" . $id;
+                      ?>
+                      <a href="<?php echo $url; ?>" class="button-link"
                           ><svg
                             xmlns="http://www.w3.org/2000/svg"
                             height="20"

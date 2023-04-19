@@ -6,9 +6,7 @@
 
 }
 
-.text-main-color{
-    color: var(--main-color);
-}
+
 .border-main-color{
     border-bottom-style: solid;
     border-width: 4px;
@@ -100,4 +98,24 @@
 .button-link{
     text-decoration: none;
     color: black;
+}
+.popup {
+    position: absolute;
+    display: none;
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 200px;
+    height: 100px;
+}
+
+.popup-container {
+    position: relative;
+    display: inline-block;
+}
+
+#profile-picture:hover+#popup {
+    display: block;
 }
